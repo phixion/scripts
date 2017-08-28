@@ -1,0 +1,20 @@
+[Unit]
+Description=Dome 9 Firewall
+After=network.target
+
+[Service]
+Type=forking
+# check if watchdog set to not 0 in systemd.conf
+WatchdogSec=30s
+User=root
+WorkingDirectory=/tmp
+ExecStartPre=/bin/rm -f /var/run/dome9d.pid
+ExecStart=/usr/bin/dome9d --logfile=/var/log/dome9d.log --pidfile=/var/run/dome9d.pid start
+ExecStop=/usr/bin/dome9d stop
+ExecReload=/bin/kill -HUP $MAINPID
+SuccessExitStatus=1 2 8 SIGKILL
+PIDFile=/var/run/dome9d.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

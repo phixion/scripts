@@ -2,6 +2,7 @@
 # req:  python > 2.4 < 3.0 :(
 #       openssl
 #       iptables
+# see dome9d.service for my systemd config
 wget http://repository.dome9.com/dist/Dome9Agent-latest.tar.gz
 tar xvfz Dome9Agent-latest.tar.gz && cd Dome9Agent-latest.tar.gz
 sudo python setup.py install
