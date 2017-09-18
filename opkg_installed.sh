@@ -1,6 +1,6 @@
 #!/bin/sh
 #collect installed openwrt packages
-#reinstall after update with opkg install `cat /etc/config/packlist.txt`
+#reinstall after update with opkg update && opkg install `cat /etc/config/packlist.txt` && reboot
 
 FLASH_TIME=$(opkg info busybox | grep '^Installed-Time: ')
 
