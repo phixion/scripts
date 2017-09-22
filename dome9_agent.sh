@@ -4,7 +4,7 @@
 #       iptables
 # see dome9d.service for my systemd config
 wget http://repository.dome9.com/dist/Dome9Agent-latest.tar.gz
-tar xvfz Dome9Agent-latest.tar.gz && cd Dome9Agent-latest.tar.gz
+tar xvfz Dome9Agent-latest.tar.gz && cd Dome9Agent-1.6.2/
 sudo python setup.py install
 sudo cp contrib/dome9d_init /etc/init.d/dome9d
 sudo cp contrib/dome9d_cron /etc/cron.d/dome9d
