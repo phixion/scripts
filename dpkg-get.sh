@@ -1,6 +1,6 @@
 #!/bin/bash
 #install debs from urls i.e. post fwupd deployment for unifi devices
-#sudo bash -c "wget url://to_this_script -O- | tr -d '\r' > /usr/local/bin/dpkg-get && \
+#sudo bash -c "wget https://raw.githubusercontent.com/phixion/scripts/master/dpkg-get.sh -O- | tr -d '\r' > /usr/local/bin/dpkg-get && \
 #chmod a+x /usr/local/bin/dpkg-get"
 
 dir="/tmp/dpkg-get"
