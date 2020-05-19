@@ -1,0 +1,42 @@
+sed -i 's/__bitwise/FDT_BITWISE/'  /root/userland/opensrc/helpers/libfdt/libfdt_env.h
+sed -i 's/__force/FDT_FORCE/'  /root/userland/opensrc/helpers/libfdt/libfdt_env.h
+cd /root/userland
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DARM64=ON ../
+make -j4 && make install
+cp -rfp /opt/vc/* /usr
+
+nano /etc/ld.so.conf add
+/opt/vc/lib
+
+ldconfig
+
+Test:
+
+gentoo ~/userland/build # ldd /opt/vc/bin/vcgencmd 
+	linux-vdso.so.1 (0x0000007fb8c50000)
+	libvchiq_arm.so => /usr/lib/libvchiq_arm.so (0x0000007fb8bd5000)
+	libvcos.so => /usr/lib/libvcos.so (0x0000007fb8bb7000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x0000007fb8b84000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x0000007fb8b70000)
+	librt.so.1 => /lib64/librt.so.1 (0x0000007fb8b58000)
+	libc.so.6 => /lib64/libc.so.6 (0x0000007fb89d5000)
+	/lib/ld-linux-aarch64.so.1 => /lib64/ld-linux-aarch64.so.1 (0x0000007fb8c22000)
+gentoo ~/userland/build # vcgencmd 
+Usage: vcgencmd [-t] command
+Send a command to the VideoCore and print the result.
+
+  -t          Time how long the command takes to complete
+  -h, --help  Show this information
+
+Use the command 'vcgencmd commands' to get a list of available commands
+
+Exit status:
+   0    command completed successfully
+  -1    problem with VCHI
+  -2    VideoCore returned an error
+
+For further documentation please see
+https://www.raspberrypi.org/documentation/raspbian/applications/vcgencmd.md
+
+gentoo ~/userland/build # 
